@@ -1,0 +1,8 @@
+name "dtypeutils"
+description "Helper functions that deal with D types.."
+copyright "Copyright © 2017"
+authors "Paul Crane"
+targetType "library"
+configuration "library" {
+	targetType "library"
+}
