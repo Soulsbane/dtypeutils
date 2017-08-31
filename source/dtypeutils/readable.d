@@ -1,8 +1,40 @@
 module dtypeutils.readable;
 
-private immutable string[string] READABLE_TYPES;
+import std.traits;
+import std.stdio;
+import std.conv;
 
-static this() pure
+string getReadableType(alias dtype)()
 {
-    READABLE_TYPES = ["long" : "number", "string" : "text"];
+	mixin("immutable bool typeString = isSomeString!" ~ dtype ~ ";");
+	mixin("immutable bool typeNumeric = isNumeric!" ~ dtype ~ ";");
+
+	if(typeString)
+	{
+		return "text";
+	}
+	else if(typeNumeric)
+	{
+		mixin("immutable bool typeFloat = isFloatingPoint!" ~ dtype ~ ";");
+
+		if(typeFloat)
+		{
+			return "decimal";
+		}
+		else
+		{
+			return "number";
+		}
+	}
+	else
+	{
+		return "unknown";
+	}
+}
+
+unittest
+{
+	assert(getReadableType!"long" == "number");
+	assert(getReadableType!"string" == "text");
+	assert(getReadableType!"float" == "decimal");
 }
