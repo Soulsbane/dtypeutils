@@ -1,3 +1,6 @@
+/**
+	Functions for converting a D type into a human readable type.
+*/
 module dtypeutils.readable;
 
 import std.traits;
