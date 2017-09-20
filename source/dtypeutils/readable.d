@@ -55,9 +55,9 @@ string getReadableType(alias typeName)()
 ///
 unittest
 {
-	assert(getReadableType!"long" == "number");
-	assert(getReadableType!"string" == "text");
-	assert(getReadableType!"float" == "decimal");
+	getReadableType!("long").should.equal("number");
+	getReadableType!("string").should.equal("text");
+	getReadableType!("float").should.equal("decimal");
 }
 
 /**
