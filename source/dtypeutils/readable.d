@@ -19,15 +19,15 @@ immutable UNKNOWN = "unknown";
 	Turns a D type into a human readable type.
 
 	Params:
-		dtype = The D type.
+		typeName = The D type.
 
 	Returns:
 		A human readable type.
 */
-string getReadableType(alias dtype)()
+string getReadableType(alias typeName)()
 {
-	mixin("immutable bool typeString = isSomeString!" ~ dtype ~ ";");
-	mixin("immutable bool typeNumeric = isNumeric!" ~ dtype ~ ";");
+	mixin("immutable bool typeString = isSomeString!" ~ typeName ~ ";");
+	mixin("immutable bool typeNumeric = isNumeric!" ~ typeName ~ ";");
 
 	if(typeString)
 	{
@@ -35,7 +35,7 @@ string getReadableType(alias dtype)()
 	}
 	else if(typeNumeric)
 	{
-		mixin("immutable bool typeFloat = isFloatingPoint!" ~ dtype ~ ";");
+		mixin("immutable bool typeFloat = isFloatingPoint!" ~ typeName ~ ";");
 
 		if(typeFloat)
 		{
