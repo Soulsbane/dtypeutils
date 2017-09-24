@@ -27,7 +27,12 @@ bool isTrue(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.yes
 {
 	static if(isIntegral!T)
 	{
-		return(value == 1);
+		if(allowInteger)
+		{
+			return(value == 1);
+		}
+
+		return false;
 	}
 	else
 	{
@@ -49,6 +54,8 @@ unittest
 	assert(isTrue("0") == false);
 	assert(isTrue("12345") == false);
 	assert(isTrue("trues") == false);
+	assert(isTrue(1) == true);
+	assert(1.isTrue(AllowNumeric.no) == false);
 
 	assert("1".isTrue(AllowNumeric.no) == false);
 }
