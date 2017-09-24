@@ -9,6 +9,7 @@ module dtypeutils.utils;
 import std.typecons;
 import std.traits;
 import std.conv;
+import std.algorithm;
 
 alias AllowNumeric = Flag!"allowNumeric";
 
@@ -138,7 +139,7 @@ unittest
 bool isDecimal(const string value) pure @safe
 {
 	import std.string : isNumeric, countchars;
-	return (isNumeric(value) && value.countchars(".") == 1) ? true : false;
+	return (isNumeric(value) && value.count(".") == 1) ? true : false;
 }
 
 ///
@@ -160,7 +161,7 @@ unittest
 bool isInteger(const string value) pure @safe
 {
 	import std.string : isNumeric, countchars;
-	return (isNumeric(value) && value.countchars(".") == 0) ? true : false;
+	return (isNumeric(value) && value.count(".") == 0) ? true : false;
 }
 
 ///
