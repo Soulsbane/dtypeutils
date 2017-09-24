@@ -18,7 +18,7 @@ alias AllowNumeric = Flag!"allowNumeric";
 
 	Params:
 		value = The value to check for a true value
-		allowInteger = Set to allowNumericBooleanValues.yes if a true value can be a numeric 1
+		allowInteger = Set to allowNumeric.yes if a true value can be a numeric 1
 
 	Returns:
 		true if the value is true false otherwise.
@@ -58,7 +58,7 @@ unittest
 
 	Params:
 		value = The value to check for a false value
-		allowInteger = Set to allowNumericBooleanValues.yes if a false value can be a numeric 0
+		allowInteger = Set to allowNumeric.yes if a false value can be a numeric 0
 
 	Returns:
 		true if the value is false false otherwise.
@@ -98,7 +98,7 @@ unittest
 
 	Params:
 		value = number or boolean string to use. Valid values of 0, 1, "0", "1", "true", "false"
-		allowInteger = Set to allowNumericBooleanValues.yes if a true/false value can be a numeric 0 or 1
+		allowInteger = Set to allowNumeric.yes if a true/false value can be a numeric 0 or 1
 
 	Returns:
 		true if the value is a boolean false otherwise.
