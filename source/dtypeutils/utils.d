@@ -10,7 +10,7 @@ import std.typecons;
 import std.traits;
 import std.conv;
 
-alias AllowNumericBooleanValues = Flag!"allowNumericBooleanValues";
+alias AllowNumeric = Flag!"allowNumeric";
 
 /**
 	Determines if value is a true value
@@ -22,7 +22,7 @@ alias AllowNumericBooleanValues = Flag!"allowNumericBooleanValues";
 	Returns:
 		true if the value is true false otherwise.
 */
-bool isTrue(T)(const T value, const AllowNumericBooleanValues allowInteger = AllowNumericBooleanValues.yes) @trusted
+bool isTrue(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.yes) @trusted
 {
 	static if(isIntegral!T)
 	{
@@ -49,7 +49,7 @@ unittest
 	assert(isTrue("12345") == false);
 	assert(isTrue("trues") == false);
 
-	assert("1".isTrue(AllowNumericBooleanValues.no) == false);
+	assert("1".isTrue(AllowNumeric.no) == false);
 }
 
 /**
@@ -62,7 +62,7 @@ unittest
 	Returns:
 		true if the value is false false otherwise.
 */
-bool isFalse(T)(const T value, const AllowNumericBooleanValues allowInteger = AllowNumericBooleanValues.yes) @trusted
+bool isFalse(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.yes) @trusted
 {
 	static if(isIntegral!T)
 	{
@@ -89,7 +89,7 @@ unittest
 	assert(isFalse("12345") == false);
 	assert(isFalse("trues") == false);
 
-	assert("0".isFalse(AllowNumericBooleanValues.no) == false);
+	assert("0".isFalse(AllowNumeric.no) == false);
 }
 
 /**
@@ -102,7 +102,7 @@ unittest
 	Returns:
 		true if the value is a boolean false otherwise.
 */
-bool isBoolean(T)(const T value, const AllowNumericBooleanValues allowInteger = AllowNumericBooleanValues.yes) @trusted
+bool isBoolean(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.yes) @trusted
 {
 	return(isTrue(value, allowInteger) || isFalse(value, allowInteger));
 }
@@ -118,8 +118,8 @@ unittest
 	assert("false".isBoolean == true);
 	assert("trues".isBoolean == false);
 
-	assert("0".isBoolean(AllowNumericBooleanValues.no) == false);
-	assert("1".isBoolean(AllowNumericBooleanValues.no) == false);
+	assert("0".isBoolean(AllowNumeric.no) == false);
+	assert("1".isBoolean(AllowNumeric.no) == false);
 
 	assert(0.isBoolean == true);
 	assert(1.isBoolean == true);
