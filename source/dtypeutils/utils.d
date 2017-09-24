@@ -74,7 +74,12 @@ bool isFalse(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.ye
 {
 	static if(isIntegral!T)
 	{
-		return(value == 0);
+		if(allowInteger)
+		{
+			return(value == 0);
+		}
+
+		return false;
 	}
 	else
 	{
@@ -98,6 +103,8 @@ unittest
 	assert(isFalse("trues") == false);
 
 	assert("0".isFalse(AllowNumeric.no) == false);
+	assert(0.isFalse(AllowNumeric.no) == false);
+	assert(13.isFalse(AllowNumeric.no) == false);
 }
 
 /**
