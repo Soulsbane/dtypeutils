@@ -105,7 +105,7 @@ bool isFalse(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.ye
 	{
 		if(allowInteger)
 		{
-			return(value == "0" || value == "false");
+			return(value == "0" || value == "false" || value == "0.0");
 		}
 
 		return (value == "false");
@@ -125,6 +125,8 @@ unittest
 	"trues".isFalse.should.equal(false);
 	0.0.isFalse(AllowNumeric.yes).should.equal(true);
 	0.0.isFalse(AllowNumeric.no).should.equal(false);
+	"0.0".isFalse(AllowNumeric.yes).should.equal(true);
+	"2.0".isFalse(AllowNumeric.yes).should.equal(false);
 
 	"0".isFalse(AllowNumeric.no).should.equal(false);
 	0.isFalse(AllowNumeric.no).should.equal(false);
