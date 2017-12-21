@@ -90,12 +90,9 @@ bool isFalse(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.ye
 
 	static if(isFloatingPoint!T && !is(T == enum))
 	{
-		if(allowInteger)
+		if(allowInteger && (value.isNaN || value == 0.0))
 		{
-			if(value.isNaN || value == 0.0)
-			{
-				return true;
-			}
+			return true;
 		}
 
 		return false;
