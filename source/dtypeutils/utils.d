@@ -73,17 +73,17 @@ unittest
 	"0".isTrue.should.equal(false);
 	"12345".isTrue.should.equal(false);
 	"trues".isTrue.should.equal(false);
-	1.isTrue.should.equal(true);
-
-	0.0.isTrue.should.equal(false);
-	0.0.isTrue(AllowNumeric.no).should.equal(false);
-	1.0.isTrue.should.equal(true);
+	"1".isTrue(AllowNumeric.no).should.equal(false);
 	"0.0".isTrue.should.equal(false);
 	"2.0".isTrue.should.equal(false);
 	"1.0".isTrue.should.equal(true);
 
+	0.0.isTrue.should.equal(false);
+	0.0.isTrue(AllowNumeric.no).should.equal(false);
+	1.0.isTrue.should.equal(true);
+
 	1.isTrue(AllowNumeric.no).should.equal(false);
-	"1".isTrue(AllowNumeric.no).should.equal(false);
+	1.isTrue.should.equal(true);
 }
 
 /**
@@ -140,12 +140,17 @@ unittest
 	"0".isFalse.should.equal(true);
 	"12345".isFalse.should.equal(false);
 	"trues".isFalse.should.equal(false);
-	0.0.isFalse.should.equal(true);
-	0.0.isFalse(AllowNumeric.no).should.equal(false);
+	"0".isFalse(AllowNumeric.no).should.equal(false);
 	"0.0".isFalse.should.equal(true);
 	"2.0".isFalse.should.equal(false);
-
 	"0".isFalse(AllowNumeric.no).should.equal(false);
+
+	0.0.isFalse.should.equal(true);
+	0.0.isFalse(AllowNumeric.no).should.equal(false);
+	1.0.isFalse.should.equal(false);
+
+
+	0.isFalse.should.equal(true);
 	0.isFalse(AllowNumeric.no).should.equal(false);
 	13.isFalse(AllowNumeric.no).should.equal(false);
 }
