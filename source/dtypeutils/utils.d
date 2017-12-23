@@ -10,7 +10,7 @@ import std.typecons;
 import std.traits;
 import std.conv;
 import std.algorithm;
-import std.math : isNaN;
+import std.math;
 
 version(unittest)
 {
@@ -40,15 +40,28 @@ bool isTrue(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.yes
 
 		return false;
 	}
-	else
+
+	static if(isFloatingPoint!T && !is(T == enum))
+	{
+		if(allowInteger && approxEqual(value, 1.0))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	static if(isSomeString!T)
 	{
 		if(allowInteger)
 		{
-			return(value == "1" || value == "true");
+			return(value == "1" || value == "true" || value == "1.0");
 		}
 
 		return (value == "true");
 	}
+
+	assert(0); // Other types not supported
 }
 
 ///
@@ -61,6 +74,12 @@ unittest
 	"12345".isTrue.should.equal(false);
 	"trues".isTrue.should.equal(false);
 	1.isTrue.should.equal(true);
+
+	0.0.isTrue(AllowNumeric.yes).should.equal(false);
+	0.0.isTrue(AllowNumeric.no).should.equal(false);
+	"0.0".isTrue(AllowNumeric.yes).should.equal(false);
+	"2.0".isTrue(AllowNumeric.yes).should.equal(false);
+	"1.0".isTrue(AllowNumeric.yes).should.equal(true);
 
 	1.isTrue(AllowNumeric.no).should.equal(false);
 	"1".isTrue(AllowNumeric.no).should.equal(false);
