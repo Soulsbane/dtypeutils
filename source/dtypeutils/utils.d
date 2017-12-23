@@ -24,16 +24,16 @@ alias AllowNumeric = Flag!"allowNumeric";
 
 	Params:
 		value = The value to check for a true value
-		allowInteger = Set to allowNumeric.yes if a true value can be a numeric 1
+		allowNumeric = Set to allowNumeric.yes if a true value can be a numeric 1
 
 	Returns:
 		true if the value is true false otherwise.
 */
-bool isTrue(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.yes) @trusted
+bool isTrue(T)(const T value, const AllowNumeric allowNumeric = AllowNumeric.yes) @trusted
 {
 	static if(isIntegral!T)
 	{
-		if(allowInteger)
+		if(allowNumeric)
 		{
 			return(value == 1);
 		}
@@ -43,7 +43,7 @@ bool isTrue(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.yes
 
 	static if(isFloatingPoint!T && !is(T == enum))
 	{
-		if(allowInteger && approxEqual(value, 1.0))
+		if(allowNumeric && approxEqual(value, 1.0))
 		{
 			return true;
 		}
@@ -53,7 +53,7 @@ bool isTrue(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.yes
 
 	static if(isSomeString!T)
 	{
-		if(allowInteger)
+		if(allowNumeric)
 		{
 			return(value == "1" || value == "true" || value == "1.0");
 		}
@@ -91,16 +91,16 @@ unittest
 
 	Params:
 		value = The value to check for a false value
-		allowInteger = Set to allowNumeric.yes if a false value can be a numeric 0
+		allowNumeric = Set to allowNumeric.yes if a false value can be a numeric 0
 
 	Returns:
 		true if the value is false false otherwise.
 */
-bool isFalse(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.yes) @trusted
+bool isFalse(T)(const T value, const AllowNumeric allowNumeric = AllowNumeric.yes) @trusted
 {
 	static if(isIntegral!T)
 	{
-		if(allowInteger)
+		if(allowNumeric)
 		{
 			return(value == 0);
 		}
@@ -110,7 +110,7 @@ bool isFalse(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.ye
 
 	static if(isFloatingPoint!T && !is(T == enum))
 	{
-		if(allowInteger && (value.isNaN || value == 0.0))
+		if(allowNumeric && (value.isNaN || value == 0.0))
 		{
 			return true;
 		}
@@ -120,7 +120,7 @@ bool isFalse(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.ye
 
 	static if(isSomeString!T)
 	{
-		if(allowInteger)
+		if(allowNumeric)
 		{
 			return(value == "0" || value == "false" || value == "0.0");
 		}
@@ -160,14 +160,14 @@ unittest
 
 	Params:
 		value = number or boolean string to use. Valid values of 0, 1, "0", "1", "true", "false"
-		allowInteger = Set to allowNumeric.yes if a true/false value can be a numeric 0 or 1
+		allowNumeric = Set to allowNumeric.yes if a true/false value can be a numeric 0 or 1
 
 	Returns:
 		true if the value is a boolean false otherwise.
 */
-bool isBoolean(T)(const T value, const AllowNumeric allowInteger = AllowNumeric.yes) @trusted
+bool isBoolean(T)(const T value, const AllowNumeric allowNumeric = AllowNumeric.yes) @trusted
 {
-	return(isTrue(value, allowInteger) || isFalse(value, allowInteger));
+	return(isTrue(value, allowNumeric) || isFalse(value, allowNumeric));
 }
 
 ///
