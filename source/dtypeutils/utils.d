@@ -77,6 +77,7 @@ unittest
 
 	0.0.isTrue(AllowNumeric.yes).should.equal(false);
 	0.0.isTrue(AllowNumeric.no).should.equal(false);
+	1.0.isTrue.should.equal(true);
 	"0.0".isTrue(AllowNumeric.yes).should.equal(false);
 	"2.0".isTrue(AllowNumeric.yes).should.equal(false);
 	"1.0".isTrue(AllowNumeric.yes).should.equal(true);
