@@ -17,8 +17,6 @@ version(unittest)
 	import fluent.asserts;
 }
 
-alias AllowNumeric = Flag!"allowNumeric";
-
 /**
 	Determines if value is a true value
 
@@ -29,7 +27,7 @@ alias AllowNumeric = Flag!"allowNumeric";
 	Returns:
 		true if the value is true false otherwise.
 */
-bool isTrue(T)(const T value, const AllowNumeric allowNumeric = AllowNumeric.yes) @trusted
+bool isTrue(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allowNumeric) @trusted
 {
 	static if(isIntegral!T)
 	{
@@ -73,16 +71,16 @@ unittest
 	"0".isTrue.should.equal(false);
 	"12345".isTrue.should.equal(false);
 	"trues".isTrue.should.equal(false);
-	"1".isTrue(AllowNumeric.no).should.equal(false);
+	"1".isTrue(No.allowNumeric).should.equal(false);
 	"0.0".isTrue.should.equal(false);
 	"2.0".isTrue.should.equal(false);
 	"1.0".isTrue.should.equal(true);
 
 	0.0.isTrue.should.equal(false);
-	0.0.isTrue(AllowNumeric.no).should.equal(false);
+	0.0.isTrue(No.allowNumeric).should.equal(false);
 	1.0.isTrue.should.equal(true);
 
-	1.isTrue(AllowNumeric.no).should.equal(false);
+	1.isTrue(No.allowNumeric).should.equal(false);
 	1.isTrue.should.equal(true);
 }
 
@@ -91,12 +89,12 @@ unittest
 
 	Params:
 		value = The value to check for a false value
-		allowNumeric = Set to allowNumeric.yes if a false value can be a numeric 0
+		allowNumeric = Set to Yes.allowNumeric if a false value can be a numeric 0
 
 	Returns:
 		true if the value is false false otherwise.
 */
-bool isFalse(T)(const T value, const AllowNumeric allowNumeric = AllowNumeric.yes) @trusted
+bool isFalse(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allowNumeric) @trusted
 {
 	static if(isIntegral!T)
 	{
@@ -140,19 +138,19 @@ unittest
 	"0".isFalse.should.equal(true);
 	"12345".isFalse.should.equal(false);
 	"trues".isFalse.should.equal(false);
-	"0".isFalse(AllowNumeric.no).should.equal(false);
+	"0".isFalse(No.allowNumeric).should.equal(false);
 	"0.0".isFalse.should.equal(true);
 	"2.0".isFalse.should.equal(false);
-	"0".isFalse(AllowNumeric.no).should.equal(false);
+	"0".isFalse(No.allowNumeric).should.equal(false);
 
 	0.0.isFalse.should.equal(true);
-	0.0.isFalse(AllowNumeric.no).should.equal(false);
+	0.0.isFalse(No.allowNumeric).should.equal(false);
 	1.0.isFalse.should.equal(false);
 
 
 	0.isFalse.should.equal(true);
-	0.isFalse(AllowNumeric.no).should.equal(false);
-	13.isFalse(AllowNumeric.no).should.equal(false);
+	0.isFalse(No.allowNumeric).should.equal(false);
+	13.isFalse(No.allowNumeric).should.equal(false);
 }
 
 /**
@@ -160,12 +158,12 @@ unittest
 
 	Params:
 		value = number or boolean string to use. Valid values of 0, 1, "0", "1", "true", "false"
-		allowNumeric = Set to allowNumeric.yes if a true/false value can be a numeric 0 or 1
+		allowNumeric = Set to Yes.allowNumeric if a true/false value can be a numeric 0 or 1
 
 	Returns:
 		true if the value is a boolean false otherwise.
 */
-bool isBoolean(T)(const T value, const AllowNumeric allowNumeric = AllowNumeric.yes) @trusted
+bool isBoolean(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allowNumeric) @trusted
 {
 	return(isTrue(value, allowNumeric) || isFalse(value, allowNumeric));
 }
@@ -181,8 +179,8 @@ unittest
 	"false".isBoolean.should.equal(true);
 	"trues".isBoolean.should.equal(false);
 
-	"0".isBoolean(AllowNumeric.no).should.equal(false);
-	"1".isBoolean(AllowNumeric.no).should.equal(false);
+	"0".isBoolean(No.allowNumeric).should.equal(false);
+	"1".isBoolean(No.allowNumeric).should.equal(false);
 
 	0.isBoolean.should.equal(true);
 	1.isBoolean.should.equal(true);
