@@ -7,15 +7,11 @@ import std.traits;
 import std.stdio;
 import std.conv;
 
-version(unittest)
-{
-	import fluent.asserts;
-}
-
 immutable BOOLEAN = "boolean";
 immutable NUMBER = "number";
 immutable DECIMAL = "decimal";
 immutable STRING = "string";
+// TODO: characters should be a chractar not a string.
 immutable UNKNOWN = "unknown";
 
 /**
@@ -58,9 +54,9 @@ string getReadableType(alias typeName)()
 ///
 unittest
 {
-	getReadableType!("long").should.equal("number");
-	getReadableType!("string").should.equal("text");
-	getReadableType!("float").should.equal("decimal");
+	assert(getReadableType!("long") == "number");
+	assert(getReadableType!("string") == "text");
+	assert(getReadableType!("float") =="decimal");
 }
 
 /**
@@ -107,28 +103,28 @@ string getReadableType(const string typeName)
 ///
 unittest
 {
-	getReadableType("bool").should.equal(BOOLEAN);
-	getReadableType("void").should.equal(UNKNOWN);
-	getReadableType("byte").should.equal(NUMBER);
-	getReadableType("ubyte").should.equal(NUMBER);
-	getReadableType("short").should.equal(NUMBER);
-	getReadableType("ushort").should.equal(NUMBER);
-	getReadableType("int").should.equal(NUMBER);
-	getReadableType("uint").should.equal(NUMBER);
-	getReadableType("long").should.equal(NUMBER);
-	getReadableType("ulong").should.equal(NUMBER);
-	getReadableType("cent").should.equal(NUMBER);
-	getReadableType("ucent").should.equal(NUMBER);
-	getReadableType("float").should.equal(DECIMAL);
-	getReadableType("double").should.equal(DECIMAL);
-	getReadableType("real").should.equal(DECIMAL);
-	getReadableType("ifloat").should.equal(DECIMAL);
-	getReadableType("idouble").should.equal(DECIMAL);
-	getReadableType("ireal").should.equal(DECIMAL);
-	getReadableType("cfloat").should.equal(DECIMAL);
-	getReadableType("cdouble").should.equal(DECIMAL);
-	getReadableType("creal").should.equal(DECIMAL);
-	getReadableType("char").should.equal(STRING);
-	getReadableType("wchar").should.equal(STRING);
-	getReadableType("dchar").should.equal(STRING);
+	assert(getReadableType("bool") == BOOLEAN);
+	assert(getReadableType("void") == UNKNOWN);
+	assert(getReadableType("byte") == NUMBER);
+	assert(getReadableType("ubyte") == NUMBER);
+	assert(getReadableType("short") == NUMBER);
+	assert(getReadableType("ushort") == NUMBER);
+	assert(getReadableType("int") == NUMBER);
+	assert(getReadableType("uint") == NUMBER);
+	assert(getReadableType("long") == NUMBER);
+	assert(getReadableType("ulong") == NUMBER);
+	assert(getReadableType("cent") == NUMBER);
+	assert(getReadableType("ucent") == NUMBER);
+	assert(getReadableType("float") == DECIMAL);
+	assert(getReadableType("double") == DECIMAL);
+	assert(getReadableType("real") == DECIMAL);
+	assert(getReadableType("ifloat") == DECIMAL);
+	assert(getReadableType("idouble") == DECIMAL);
+	assert(getReadableType("ireal") == DECIMAL);
+	assert(getReadableType("cfloat") == DECIMAL);
+	assert(getReadableType("cdouble") == DECIMAL);
+	assert(getReadableType("creal") == DECIMAL);
+	assert(getReadableType("char") == STRING);
+	assert(getReadableType("wchar") == STRING);
+	assert(getReadableType("dchar") == STRING);
 }

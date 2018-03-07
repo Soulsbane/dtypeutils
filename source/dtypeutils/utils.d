@@ -12,11 +12,6 @@ import std.conv;
 import std.algorithm;
 import std.math;
 
-version(unittest)
-{
-	import fluent.asserts;
-}
-
 /**
 	Determines if value is a true value
 
@@ -65,23 +60,23 @@ bool isTrue(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allow
 ///
 unittest
 {
-	"true".isTrue.should.equal(true);
-	"false".isTrue.should.equal(false);
-	"1".isTrue.should.equal(true);
-	"0".isTrue.should.equal(false);
-	"12345".isTrue.should.equal(false);
-	"trues".isTrue.should.equal(false);
-	"1".isTrue(No.allowNumeric).should.equal(false);
-	"0.0".isTrue.should.equal(false);
-	"2.0".isTrue.should.equal(false);
-	"1.0".isTrue.should.equal(true);
+	assert("true".isTrue == true);
+	assert("false".isTrue == false);
+	assert("1".isTrue == true);
+	assert("0".isTrue == false);
+	assert("12345".isTrue == false);
+	assert("trues".isTrue == false);
+	assert("1".isTrue(No.allowNumeric) == false);
+	assert("0.0".isTrue == false);
+	assert("2.0".isTrue == false);
+	assert("1.0".isTrue == true);
 
-	0.0.isTrue.should.equal(false);
-	0.0.isTrue(No.allowNumeric).should.equal(false);
-	1.0.isTrue.should.equal(true);
+	assert(0.0.isTrue == false);
+	assert(0.0.isTrue(No.allowNumeric) == false);
+	assert(1.0.isTrue == true);
 
-	1.isTrue(No.allowNumeric).should.equal(false);
-	1.isTrue.should.equal(true);
+	assert(1.isTrue(No.allowNumeric) == false);
+	assert(1.isTrue == true);
 }
 
 /**
@@ -132,25 +127,24 @@ bool isFalse(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allo
 ///
 unittest
 {
-	"false".isFalse.should.equal(true);
-	"true".isFalse.should.equal(false);
-	"1".isFalse.should.equal(false);
-	"0".isFalse.should.equal(true);
-	"12345".isFalse.should.equal(false);
-	"trues".isFalse.should.equal(false);
-	"0".isFalse(No.allowNumeric).should.equal(false);
-	"0.0".isFalse.should.equal(true);
-	"2.0".isFalse.should.equal(false);
-	"0".isFalse(No.allowNumeric).should.equal(false);
+	assert("false".isFalse == true);
+	assert("true".isFalse == false);
+	assert("1".isFalse == false);
+	assert("0".isFalse == true);
+	assert("12345".isFalse == false);
+	assert("trues".isFalse == false);
+	assert("0".isFalse(No.allowNumeric) == false);
+	assert("0.0".isFalse == true);
+	assert("2.0".isFalse == false);
+	assert("0".isFalse(No.allowNumeric) == false);
 
-	0.0.isFalse.should.equal(true);
-	0.0.isFalse(No.allowNumeric).should.equal(false);
-	1.0.isFalse.should.equal(false);
+	assert(0.0.isFalse == true);
+	assert(0.0.isFalse(No.allowNumeric) == false);
+	assert(1.0.isFalse == false);
 
-
-	0.isFalse.should.equal(true);
-	0.isFalse(No.allowNumeric).should.equal(false);
-	13.isFalse(No.allowNumeric).should.equal(false);
+	assert(0.isFalse == true);
+	assert(0.isFalse(No.allowNumeric) == false);
+	assert(13.isFalse(No.allowNumeric) == false);
 }
 
 /**
@@ -171,20 +165,20 @@ bool isBoolean(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.al
 ///
 unittest
 {
-	"0".isBoolean.should.equal(true);
-	"1".isBoolean.should.equal(true);
-	"2".isBoolean.should.equal(false);
+	assert("0".isBoolean == true);
+	assert("1".isBoolean == true);
+	assert("2".isBoolean == false);
 
-	"true".isBoolean.should.equal(true);
-	"false".isBoolean.should.equal(true);
-	"trues".isBoolean.should.equal(false);
+	assert("true".isBoolean == true);
+	assert("false".isBoolean == true);
+	assert("trues".isBoolean == false);
 
-	"0".isBoolean(No.allowNumeric).should.equal(false);
-	"1".isBoolean(No.allowNumeric).should.equal(false);
+	assert("0".isBoolean(No.allowNumeric) == false);
+	assert("1".isBoolean(No.allowNumeric) == false);
 
-	0.isBoolean.should.equal(true);
-	1.isBoolean.should.equal(true);
-	2.isBoolean.should.equal(false);
+	assert(0.isBoolean == true);
+	assert(1.isBoolean == true);
+	assert(2.isBoolean == false);
 }
 
 /**
@@ -205,9 +199,9 @@ bool isDecimal(const string value) pure @safe
 ///
 unittest
 {
-	"13".isDecimal.should.equal(false);
-	"13.333333".isDecimal.should.equal(true);
-	"zzzz".isDecimal.should.equal(false);
+	assert("13".isDecimal == false);
+	assert("13.333333".isDecimal == true);
+	assert("zzzz".isDecimal == false);
 }
 
 /**
@@ -228,9 +222,9 @@ bool isInteger(const string value) pure @safe
 ///
 unittest
 {
-	"13".isInteger.should.equal(true);
-	"13.333333".isInteger.should.equal(false);
-	"zzzz".isInteger.should.equal(false);
+	assert("13".isInteger == true);
+	assert("13.333333".isInteger == false);
+	assert("zzzz".isInteger == false);
 }
 
 /**
@@ -258,8 +252,8 @@ T convertTo(T, S)(S value,  T defaultValue)
 ///
 unittest
 {
-	"10".convertTo!int(10).should.equal(10);
-	"true".convertTo!int(12).should.equal(12);
-	"true".convertTo!bool(false).should.equal(true);
-	"falsy".convertTo!bool(false).should.equal(false);
+	assert("10".convertTo!int(10) == 10);
+	assert("true".convertTo!int(12) == 12);
+	assert("true".convertTo!bool(false) == true);
+	assert("falsy".convertTo!bool(false) == false);
 }
