@@ -19,7 +19,7 @@ import std.typecons;
 	Returns:
 		Either a true for a "Yes" or false for No or any other numeric value.
 */
-bool toBoolean(const string value)
+bool toBool(const string value)
 {
 	return (value == "Yes") || (value == "yes") || (value == "1") || (value == "true") ? true : false;
 }
@@ -27,13 +27,13 @@ bool toBoolean(const string value)
 ///
 unittest
 {
-	assert("Yes".toBoolean == true);
-	assert("yes".toBoolean == true);
-	assert("No".toBoolean == false);
-	assert("1".toBoolean == true);
-	assert("0".toBoolean == false);
-	assert("true".toBoolean == true);
-	assert("false".toBoolean == false);
+	assert("Yes".toBool == true);
+	assert("yes".toBool == true);
+	assert("No".toBool == false);
+	assert("1".toBool == true);
+	assert("0".toBool == false);
+	assert("true".toBool == true);
+	assert("false".toBool == false);
 }
 
 
@@ -75,7 +75,7 @@ struct Boolean
 public:
 	this(const string value)
 	{
-		boolean_ = value.toBoolean;
+		boolean_ = value.toBool;
 	}
 
 	this(const size_t value)
@@ -90,7 +90,7 @@ public:
 
 	bool opEquals(const string value) const
 	{
-		return (boolean_ == value.toBoolean);
+		return (boolean_ == value.toBool);
 	}
 
 	bool opEquals(const bool value) const
@@ -100,7 +100,7 @@ public:
 
 	Boolean opAssign(string value)
 	{
-		boolean_ = value.toBoolean;
+		boolean_ = value.toBool;
 		return this;
 	}
 
