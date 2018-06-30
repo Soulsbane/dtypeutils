@@ -11,6 +11,7 @@ import std.traits;
 import std.conv;
 import std.algorithm;
 import std.math;
+import std.range;
 
 /**
 	Determines if value is a true value
@@ -256,4 +257,27 @@ unittest
 	assert("true".convertTo!int(12) == 12);
 	assert("true".convertTo!bool(false) == true);
 	assert("falsy".convertTo!bool(false) == false);
+}
+
+/**
+	Converts a tuple to a range.
+
+	Params:
+		tupleValue = The value that will be converted to a range.
+
+	Returns:
+		A range that was converted from a tuple.
+*/
+auto tupleToRange(T)(T tupleValue)
+{
+	auto newRange = tupleValue.expand.only;
+	return newRange;
+}
+
+unittest
+{
+	auto theTupleValues = tuple(1, 2, 4, 8, 16);
+	auto valueSummed = theTupleValues.tupleToRange.map!(a => 3 + a).sum();
+
+	assert(valueSummed == 46);
 }
