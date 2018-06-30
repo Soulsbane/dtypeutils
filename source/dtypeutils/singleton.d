@@ -67,11 +67,11 @@ private:
 
 private class Incrementor
 {
-	mixin Singleton!Incrementor;
+	mixin MixinSingleton!Incrementor;
 	int value;
 }
 
-private class NumberChanger : SingletonT!NumberChanger
+private class NumberChanger : Singleton!NumberChanger
 {
 	int value;
 }
