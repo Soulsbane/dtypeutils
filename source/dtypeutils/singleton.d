@@ -24,7 +24,7 @@ public:
 			{
 				if(!instance_)
 				{
-					instance_ = new T();
+					instance_ = new T;
 				}
 
 				alreadyInstantiated_ = true;

@@ -21,8 +21,7 @@ import std.typecons;
 */
 bool toBool(const string value)
 {
-	return (value == "Yes") || (value == "yes") || (value == "1") || (value == "true") ? true : false;
-}
+	return (value == "Yes") || (value == "yes") || (value == "1") || (value == "true") ? true : false;}
 
 ///
 unittest
