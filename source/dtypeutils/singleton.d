@@ -9,7 +9,7 @@ module dtypeutils.singleton;
 	Params:
 		T = The type that is mixing with the singleton.
 */
-template Singleton(T)
+template MixinSingleton(T)
 {
 private:
 	__gshared T instance_;
@@ -35,9 +35,44 @@ public:
 	}
 }
 
+/**
+	Used for a creating a single instance of an object.
+
+	Params:
+		T = The type that will be the singleton.
+*/
+class Singleton(T)
+{
+	static T getInstance()
+	{
+		if(!alreadyInstantiated_)
+		{
+			synchronized(T.classinfo)
+			{
+				if (!instance_)
+				{
+					instance_ = new T;
+				}
+
+				alreadyInstantiated_ = true;
+			}
+		}
+
+		return instance_;
+	}
+private:
+	__gshared T instance_;
+	static bool alreadyInstantiated_;
+}
+
 private class Incrementor
 {
 	mixin Singleton!Incrementor;
+	int value;
+}
+
+private class NumberChanger : SingletonT!NumberChanger
+{
 	int value;
 }
 
@@ -51,4 +86,12 @@ unittest
 	anotherIncrement.value = 111;
 
 	assert(increment.value == 111);
+
+	auto numChanger = NumberChanger.getInstance();
+	assert(numChanger.value == 0);
+
+	auto anotherNumChanger = NumberChanger.getInstance();
+	anotherNumChanger.value = 111;
+
+	assert(numChanger.value == 111);
 }
