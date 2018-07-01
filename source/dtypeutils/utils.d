@@ -268,7 +268,7 @@ unittest
 	Returns:
 		A range that was converted from a tuple.
 */
-auto tupleToRange(T)(T tupleValue)
+auto tupleToRange(T)(T tupleValue) nothrow pure @safe
 {
 	auto newRange = tupleValue.expand.only;
 	return newRange;
