@@ -268,7 +268,9 @@ unittest
 	Returns:
 		A range that was converted from a tuple.
 */
+//allSameType
 auto tupleToRange(T)(T tupleValue) nothrow pure @safe
+	if(isTypeTuple!T && allSameType!T)
 {
 	auto newRange = tupleValue.expand.only;
 	return newRange;
