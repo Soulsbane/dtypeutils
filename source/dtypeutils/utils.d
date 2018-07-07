@@ -23,7 +23,7 @@ import std.range;
 	Returns:
 		true if the value is true false otherwise.
 */
-bool isTrue(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allowNumeric) @trusted
+bool isTrue(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allowNumeric) pure nothrow @safe
 {
 	static if(isIntegral!T)
 	{
@@ -90,7 +90,7 @@ unittest
 	Returns:
 		true if the value is false false otherwise.
 */
-bool isFalse(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allowNumeric) @trusted
+bool isFalse(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allowNumeric) pure nothrow @safe
 {
 	static if(isIntegral!T)
 	{
@@ -158,7 +158,7 @@ unittest
 	Returns:
 		true if the value is a boolean false otherwise.
 */
-bool isBoolean(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allowNumeric) @trusted
+bool isBoolean(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allowNumeric) pure nothrow @safe
 {
 	return(isTrue(value, allowNumeric) || isFalse(value, allowNumeric));
 }
@@ -191,7 +191,7 @@ unittest
 	Returns:
 		true if the value is a decimal false otherwise.
 */
-bool isDecimal(const string value) pure @safe
+bool isDecimal(const string value) pure nothrow @safe
 {
 	import std.string : isNumeric, countchars;
 	return (isNumeric(value) && value.count(".") == 1) ? true : false;
@@ -214,7 +214,7 @@ unittest
 	Returns:
 		true if the value is a integer false otherwise.
 */
-bool isInteger(const string value) pure @safe
+bool isInteger(const string value) pure nothrow @safe
 {
 	import std.string : isNumeric, countchars;
 	return (isNumeric(value) && value.count(".") == 0) ? true : false;
@@ -268,7 +268,7 @@ unittest
 	Returns:
 		A range that was converted from a tuple.
 */
-auto tupleToRange(T)(T tupleValue) nothrow pure @safe
+auto tupleToRange(T)(T tupleValue) pure nothrow @safe
 	if(isTypeTuple!T && allSameType!T)
 {
 	auto newRange = tupleValue.expand.only;
