@@ -11,10 +11,10 @@ module dtypeutils.boolean;
 	Converts a string value of Yes, 1 to true. Converts No or any other numeric value to false.
 
 	Params:
-		value = The stirng value to convert.
+		value = The string value to convert.
 
 	Returns:
-		Either a true for a "Yes" or false for No or any other numeric value.
+		Either a true for a "Yes" or false for "No" or any other numeric value.
 */
 bool toBool(const string value)
 {
