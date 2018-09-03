@@ -178,6 +178,7 @@ unittest
 
 	Boolean intEquals = 1;
 	assert(intEquals == 1);
+	assert(intEquals.asBoolean() == true);
 
 	Boolean constructBoolean = Boolean(true);
 	assert(constructBoolean == true);
