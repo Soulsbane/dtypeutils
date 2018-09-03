@@ -7,9 +7,6 @@
 
 module dtypeutils.boolean;
 
-import std.traits;
-import std.typecons;
-
 /**
 	Converts a string value of Yes, 1 to true. Converts No or any other numeric value to false.
 
@@ -47,6 +44,8 @@ unittest
 */
 string toYesNo(T)(const T value)
 {
+	import std.traits : isIntegral, isBoolean;
+
 	static if(isIntegral!T)
 	{
 		return (value == 1) ? "Yes" : "No";
