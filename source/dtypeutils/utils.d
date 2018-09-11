@@ -59,6 +59,7 @@ bool isTrue(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allow
 }
 
 ///
+@("isTrue Tests")
 unittest
 {
 	assert("true".isTrue == true);
@@ -126,6 +127,7 @@ bool isFalse(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.allo
 }
 
 ///
+@("isFalse Tests")
 unittest
 {
 	assert("false".isFalse == true);
@@ -164,6 +166,7 @@ bool isBoolean(T)(const T value, const Flag!"allowNumeric" allowNumeric = Yes.al
 }
 
 ///
+@("isBoolean Tests")
 unittest
 {
 	assert("0".isBoolean == true);
@@ -198,6 +201,7 @@ bool isDecimal(const string value) pure nothrow @safe
 }
 
 ///
+@("isDecimal Tests")
 unittest
 {
 	assert("13".isDecimal == false);
@@ -221,6 +225,7 @@ bool isInteger(const string value) pure nothrow @safe
 }
 
 ///
+@("isInteger Tests")
 unittest
 {
 	assert("13".isInteger == true);
@@ -251,6 +256,7 @@ T convertTo(T, S)(S value,  T defaultValue)
 }
 
 ///
+@("convertTo Tests")
 unittest
 {
 	assert("10".convertTo!int(10) == 10);
@@ -275,6 +281,7 @@ auto tupleToRange(T)(T tupleValue) pure nothrow @safe
 	return newRange;
 }
 
+@("tupleToRange Tests")
 unittest
 {
 	auto theTupleValues = tuple(1, 2, 4, 8, 16);

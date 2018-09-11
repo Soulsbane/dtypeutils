@@ -77,6 +77,7 @@ private class NumberChanger : Singleton!NumberChanger
 }
 
 ///
+@("Singleton Tests")
 unittest
 {
 	auto increment = Incrementor.getInstance();

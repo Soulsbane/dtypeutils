@@ -21,6 +21,7 @@ bool toBool(const string value)
 	return (value == "Yes") || (value == "yes") || (value == "1") || (value == "true") ? true : false;}
 
 ///
+@("toBool")
 unittest
 {
 	assert("Yes".toBool == true);
@@ -141,6 +142,7 @@ private:
 }
 
 ///
+@("Boolean Type Tests")
 unittest
 {
 	Boolean value = 1;

@@ -52,6 +52,7 @@ string getReadableType(alias typeName)()
 }
 
 ///
+@("getReadableType Tests(alias typeName Version)")
 unittest
 {
 	assert(getReadableType!("long") == "number");
@@ -101,6 +102,7 @@ string getReadableType(const string typeName)
 }
 
 ///
+@("getReadableType Tests(string Version)")
 unittest
 {
 	assert(getReadableType("bool") == BOOLEAN);
