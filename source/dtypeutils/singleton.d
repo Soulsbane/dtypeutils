@@ -43,26 +43,7 @@ public:
 */
 class Singleton(T)
 {
-	static T getInstance()
-	{
-		if(!alreadyInstantiated_)
-		{
-			synchronized(T.classinfo)
-			{
-				if (!instance_)
-				{
-					instance_ = new T;
-				}
-
-				alreadyInstantiated_ = true;
-			}
-		}
-
-		return instance_;
-	}
-private:
-	__gshared T instance_;
-	static bool alreadyInstantiated_;
+	mixin MixinSingleton!T;
 }
 
 private class Incrementor
