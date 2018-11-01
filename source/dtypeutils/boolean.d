@@ -4,7 +4,6 @@
 	Authors:
 		Paul Crane
 */
-
 module dtypeutils.boolean;
 
 /**
@@ -18,7 +17,8 @@ module dtypeutils.boolean;
 */
 bool toBool(const string value)
 {
-	return (value == "Yes") || (value == "yes") || (value == "1") || (value == "true") ? true : false;}
+	return (value == "Yes") || (value == "yes") || (value == "1") || (value == "true") ? true : false;
+}
 
 ///
 @("toBool")
@@ -32,7 +32,6 @@ unittest
 	assert("true".toBool == true);
 	assert("false".toBool == false);
 }
-
 
 /**
 	Converts a boolean value to a Yes or No string.
