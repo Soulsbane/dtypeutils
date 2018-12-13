@@ -7,12 +7,12 @@ import std.traits;
 import std.stdio;
 import std.conv;
 
-immutable BOOLEAN = "boolean";
-immutable NUMBER = "number";
-immutable DECIMAL = "decimal";
-immutable STRING = "string";
+immutable private string BOOLEAN = "boolean";
+immutable private string NUMBER = "number";
+immutable private string DECIMAL = "decimal";
+immutable private string STRING = "string";
 // TODO: characters should be a chractar not a string.
-immutable UNKNOWN = "unknown";
+immutable private string UNKNOWN = "unknown";
 
 /**
 	Turns a D type into a human readable type.
