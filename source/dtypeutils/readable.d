@@ -24,41 +24,52 @@ immutable private string UNKNOWN = "unknown";
 	Returns:
 		A human readable type.
 */
-string getReadableType(alias typeName)()
+string getReadableType(T)()
 {
-	mixin("immutable bool typeString = isSomeString!" ~ typeName ~ ";");
-	mixin("immutable bool typeNumeric = isNumeric!" ~ typeName ~ ";");
-
-	if(typeString)
+	//INFO: This mess is due to working around DMD warnings that statement isn't reachable when it clearly was.
+	static if(isSomeString!T || isSomeChar!T || isNumeric!T || isFloatingPoint!T)
 	{
-		return "text";
-	}
-	else if(typeNumeric)
-	{
-		mixin("immutable bool typeFloat = isFloatingPoint!" ~ typeName ~ ";");
-
-		if(typeFloat)
+		static if(isSomeString!T && !isSomeChar!T)
 		{
-			return "decimal";
+			return STRING;
 		}
-		else
+
+		static if(isSomeChar!T)
 		{
-			return "number";
+			return CHARACTER;
+		}
+
+		static if(isNumeric!T)
+		{
+			if(isFloatingPoint!T)
+			{
+				return DECIMAL;
+			}
+			else
+			{
+				return NUMBER;
+			}
+		}
+
+		static if(isBoolean!T)
+		{
+			return BOOLEAN;
 		}
 	}
 	else
 	{
-		return "unknown";
+		return UNKNOWN;
 	}
 }
 
 ///
-@("getReadableType Tests(alias typeName Version)")
+@("getReadableType Tests(Template T Version)")
 unittest
 {
-	assert(getReadableType!("long") == "number");
-	assert(getReadableType!("string") == "text");
-	assert(getReadableType!("float") =="decimal");
+	assert(getReadableType!long == NUMBER);
+	assert(getReadableType!string == STRING);
+	assert(getReadableType!float == DECIMAL);
+	assert(getReadableType!char == CHARACTER);
 }
 
 /**
