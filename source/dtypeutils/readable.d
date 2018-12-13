@@ -11,6 +11,7 @@ immutable private string BOOLEAN = "boolean";
 immutable private string NUMBER = "number";
 immutable private string DECIMAL = "decimal";
 immutable private string STRING = "string";
+immutable private string CHARACTER = "character";
 // TODO: characters should be a chractar not a string.
 immutable private string UNKNOWN = "unknown";
 
@@ -93,9 +94,9 @@ string getReadableType(const string typeName)
 		"cfloat" : DECIMAL,
 		"cdouble" : DECIMAL,
 		"creal" : DECIMAL,
-		"char" : STRING,
-		"wchar" : STRING,
-		"dchar" : STRING
+		"char" : CHARACTER,
+		"wchar" : CHARACTER,
+		"dchar" : CHARACTER
 	];
 
 	return READABLE_TYPES.get(typeName, "unknown");
@@ -126,7 +127,7 @@ unittest
 	assert(getReadableType("cfloat") == DECIMAL);
 	assert(getReadableType("cdouble") == DECIMAL);
 	assert(getReadableType("creal") == DECIMAL);
-	assert(getReadableType("char") == STRING);
-	assert(getReadableType("wchar") == STRING);
-	assert(getReadableType("dchar") == STRING);
+	assert(getReadableType("char") == CHARACTER);
+	assert(getReadableType("wchar") == CHARACTER);
+	assert(getReadableType("dchar") == CHARACTER);
 }
