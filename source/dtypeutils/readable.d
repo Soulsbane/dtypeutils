@@ -12,7 +12,6 @@ immutable private string NUMBER = "number";
 immutable private string DECIMAL = "decimal";
 immutable private string STRING = "text";
 immutable private string CHARACTER = "character";
-// TODO: characters should be a chractar not a string.
 immutable private string UNKNOWN = "unknown";
 
 /**
