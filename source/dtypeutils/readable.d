@@ -108,6 +108,7 @@ unittest
 {
 	assert(getReadableType("bool") == BOOLEAN);
 	assert(getReadableType("void") == UNKNOWN);
+
 	assert(getReadableType("byte") == NUMBER);
 	assert(getReadableType("ubyte") == NUMBER);
 	assert(getReadableType("short") == NUMBER);
@@ -118,6 +119,7 @@ unittest
 	assert(getReadableType("ulong") == NUMBER);
 	assert(getReadableType("cent") == NUMBER);
 	assert(getReadableType("ucent") == NUMBER);
+
 	assert(getReadableType("float") == DECIMAL);
 	assert(getReadableType("double") == DECIMAL);
 	assert(getReadableType("real") == DECIMAL);
@@ -127,9 +129,11 @@ unittest
 	assert(getReadableType("cfloat") == DECIMAL);
 	assert(getReadableType("cdouble") == DECIMAL);
 	assert(getReadableType("creal") == DECIMAL);
+
 	assert(getReadableType("string") == STRING);
 	assert(getReadableType("dstring") == STRING);
 	assert(getReadableType("wstring") == STRING);
+
 	assert(getReadableType("char") == CHARACTER);
 	assert(getReadableType("wchar") == CHARACTER);
 	assert(getReadableType("dchar") == CHARACTER);
