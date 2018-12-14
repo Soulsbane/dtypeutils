@@ -26,40 +26,7 @@ immutable private string UNKNOWN = "unknown";
 */
 string getReadableType(T)()
 {
-	//INFO: This mess is due to working around DMD warnings that statement isn't reachable when it clearly was.
-	static if(isSomeString!T || isSomeChar!T || isNumeric!T || isFloatingPoint!T)
-	{
-		static if(isSomeString!T && !isSomeChar!T)
-		{
-			return STRING;
-		}
-
-		static if(isSomeChar!T)
-		{
-			return CHARACTER;
-		}
-
-		static if(isNumeric!T)
-		{
-			if(isFloatingPoint!T)
-			{
-				return DECIMAL;
-			}
-			else
-			{
-				return NUMBER;
-			}
-		}
-
-		static if(isBoolean!T)
-		{
-			return BOOLEAN;
-		}
-	}
-	else
-	{
-		return UNKNOWN;
-	}
+	return getReadableType(T.stringof);
 }
 
 ///
@@ -67,9 +34,22 @@ string getReadableType(T)()
 unittest
 {
 	assert(getReadableType!long == NUMBER);
-	assert(getReadableType!string == STRING);
+	assert(getReadableType!ulong == NUMBER);
+	assert(getReadableType!short == NUMBER);
+	assert(getReadableType!int == NUMBER);
+	assert(getReadableType!uint == NUMBER);
+	assert(getReadableType!byte == NUMBER);
+	assert(getReadableType!ubyte == NUMBER);
+	assert(getReadableType!short == NUMBER);
+	assert(getReadableType!ushort == NUMBER);
+
 	assert(getReadableType!float == DECIMAL);
+	assert(getReadableType!double == DECIMAL);
+	assert(getReadableType!real == DECIMAL);
 	assert(getReadableType!char == CHARACTER);
+	assert(getReadableType!dchar == CHARACTER);
+	assert(getReadableType!wchar == CHARACTER);
+	//assert(getReadableType!bool == BOOLEAN);
 }
 
 /**
