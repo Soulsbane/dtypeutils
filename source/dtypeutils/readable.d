@@ -50,10 +50,12 @@ unittest
 	assert(getReadableType!float == DECIMAL);
 	assert(getReadableType!double == DECIMAL);
 	assert(getReadableType!real == DECIMAL);
+
 	assert(getReadableType!char == CHARACTER);
 	assert(getReadableType!dchar == CHARACTER);
 	assert(getReadableType!wchar == CHARACTER);
-	//assert(getReadableType!bool == BOOLEAN);
+
+	assert(getReadableType!bool == BOOLEAN);
 }
 
 /**
