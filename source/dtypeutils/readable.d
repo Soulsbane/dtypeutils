@@ -43,6 +43,10 @@ unittest
 	assert(getReadableType!short == NUMBER);
 	assert(getReadableType!ushort == NUMBER);
 
+	assert(getReadableType!string == STRING);
+	assert(getReadableType!dstring == STRING);
+	assert(getReadableType!wstring == STRING);
+
 	assert(getReadableType!float == DECIMAL);
 	assert(getReadableType!double == DECIMAL);
 	assert(getReadableType!real == DECIMAL);
@@ -87,7 +91,10 @@ string getReadableType(const string typeName)
 		"creal" : DECIMAL,
 		"char" : CHARACTER,
 		"wchar" : CHARACTER,
-		"dchar" : CHARACTER
+		"dchar" : CHARACTER,
+		"string" : STRING,
+		"dstring" : STRING,
+		"wstring" : STRING
 	];
 
 	return READABLE_TYPES.get(typeName, "unknown");
@@ -118,6 +125,9 @@ unittest
 	assert(getReadableType("cfloat") == DECIMAL);
 	assert(getReadableType("cdouble") == DECIMAL);
 	assert(getReadableType("creal") == DECIMAL);
+	assert(getReadableType("string") == STRING);
+	assert(getReadableType("dstring") == STRING);
+	assert(getReadableType("wstring") == STRING);
 	assert(getReadableType("char") == CHARACTER);
 	assert(getReadableType("wchar") == CHARACTER);
 	assert(getReadableType("dchar") == CHARACTER);
