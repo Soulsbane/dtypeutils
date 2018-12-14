@@ -99,7 +99,7 @@ string getReadableType(const string typeName)
 		"wstring" : STRING
 	];
 
-	return READABLE_TYPES.get(typeName, "unknown");
+	return READABLE_TYPES.get(typeName, UNKNOWN);
 }
 
 ///
