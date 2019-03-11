@@ -196,7 +196,7 @@ unittest
 */
 bool isDecimal(const string value) pure nothrow @safe
 {
-	import std.string : isNumeric, countchars;
+	import std.string : isNumeric;
 	return (isNumeric(value) && value.count(".") == 1) ? true : false;
 }
 
@@ -220,7 +220,7 @@ unittest
 */
 bool isInteger(const string value) pure nothrow @safe
 {
-	import std.string : isNumeric, countchars;
+	import std.string : isNumeric;
 	return (isNumeric(value) && value.count(".") == 0) ? true : false;
 }
 
